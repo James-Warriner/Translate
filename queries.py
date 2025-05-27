@@ -1,7 +1,7 @@
 import sqlite3
 from flask import g
 
-DATABASE = 'translate.db'  # or set this via app config if you prefer
+DATABASE = 'translate.db'  
 
 def get_db():
     if 'db' not in g:

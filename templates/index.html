@@ -7,12 +7,12 @@ Home
 {% block main  %}
 
 <div class="container mt-4">
-  <button type="button">
+  <button type="button" style="background-color:grey">
     Text
   </button>
-  <button type="button">
+  <a href="/speech"><button type="button">
     Speech
-  </button>
+  </button></a>
   <button type="button">
     Image
   </button>
@@ -30,7 +30,7 @@ Home
 
     </select>
   </div>
-      <textarea class="form-control" placeholder="Input" rows="13"></textarea>
+      <textarea id="text" class="form-control" placeholder="Input" rows="13"></textarea>
     </div>
     <div class="col">
 
@@ -41,7 +41,7 @@ Home
       <!--options-->
     </select>
   </div>
-      <textarea class="form-control" placeholder="Output" disabled rows="13"></textarea>
+      <textarea class="form-control" id="out" placeholder="Output" disabled rows="13"></textarea>
     </div>
   </div>
 </div>
@@ -49,7 +49,7 @@ Home
 <div class="container mt-5">
   <div class="row">
     <div class="col text-center">
-      <button>
+      <button id="translate">
         Translate
       </button>
     </div>
@@ -61,6 +61,33 @@ Home
   document.addEventListener("DOMContentLoaded",function(){
     filterDropdown(1);
     filterDropdown(2);
+    document.getElementById("translate").addEventListener('click', async function(){
+
+      const text = document.getElementById("text").value;
+      const inp_lang = document.getElementById("languageSelect1").value;
+      const out_lang = document.getElementById("languageSelect2").value;
+
+      const res = await fetch("/translate_text",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body: JSON.stringify({
+          text:text,
+          inp_lang:inp_lang,
+          out_lang:out_lang
+
+        })
+      });
+
+      const data = await res.json();
+      if (data.translated){
+        document.getElementById("out").innerText = data.translated;
+      }
+      else{
+        document.getElementById("out").innerText = "Error, reload";
+      }
+    });
   })
 
 
@@ -72,17 +99,17 @@ async function filterDropdown(num) {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ q: query })  // stringify the body correctly
+    body: JSON.stringify({ q: query }) 
   });
 
   const data = await res.json();
 
   const select = document.getElementById("languageSelect" + num);
-  select.innerHTML = ""; // clear existing options
+  select.innerHTML = ""; 
 
   data.forEach(lang => {
     const option = document.createElement("option");
-    option.value = lang.code;  // or lang.id depending on usage
+    option.value = lang.code;  
     option.textContent = lang.language;
     select.appendChild(option);
   });
