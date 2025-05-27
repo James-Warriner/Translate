@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block main  %}
+
+<div class="container mt-4">
+  <button type="button">
+    Text
+  </button>
+  <button type="button">
+    Speech
+  </button>
+  <button type="button">
+    Image
+  </button>
+</div>
+  
+  
+  
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <div class="mb-3">
+    <input type="text" id="dropdownSearch1" class="form-control mb-2" placeholder="Search language..." onkeyup="filterDropdown(1)">
+    <select id="languageSelect1" class="form-select">
+
+    </select>
+  </div>
+      <textarea class="form-control" placeholder="Input" rows="13"></textarea>
+    </div>
+    <div class="col">
+
+
+  <div class="mb-3">
+    <input type="text" id="dropdownSearch2" class="form-control mb-2" placeholder="Search language..." onkeyup="filterDropdown(2)">
+    <select id="languageSelect2" class="form-select">
+      <!--options-->
+    </select>
+  </div>
+      <textarea class="form-control" placeholder="Output" disabled rows="13"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col text-center">
+      <button>
+        Translate
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  document.addEventListener("DOMContentLoaded",function(){
+    filterDropdown(1);
+    filterDropdown(2);
+  })
+
+
+async function filterDropdown(num) {
+  const query = document.getElementById("dropdownSearch" + num).value;
+
+  const res = await fetch("/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ q: query })  // stringify the body correctly
+  });
+
+  const data = await res.json();
+
+  const select = document.getElementById("languageSelect" + num);
+  select.innerHTML = ""; // clear existing options
+
+  data.forEach(lang => {
+    const option = document.createElement("option");
+    option.value = lang.code;  // or lang.id depending on usage
+    option.textContent = lang.language;
+    select.appendChild(option);
+  });
+}
+
+
+</script>
+
+
+
+
+
+
+
+{% endblock  %}
