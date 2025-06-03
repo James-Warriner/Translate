@@ -13,9 +13,9 @@ Home
   <a href="/speech"><button type="button">
     Speech
   </button></a>
-  <button type="button">
+  <a href="/image"><button type="button">
     Image
-  </button>
+  </button></a>
 </div>
   
   
@@ -25,7 +25,7 @@ Home
   <div class="row">
     <div class="col">
       <div class="mb-3">
-    <input type="text" id="dropdownSearch1" class="form-control mb-2" placeholder="Search language..." onkeyup="filterDropdown(1)">
+    <input type="text" id="dropdownSearch1" class="form-control mb-2" placeholder="Search language..." >
     <select id="languageSelect1" class="form-select">
 
     </select>
@@ -36,7 +36,7 @@ Home
 
 
   <div class="mb-3">
-    <input type="text" id="dropdownSearch2" class="form-control mb-2" placeholder="Search language..." onkeyup="filterDropdown(2)">
+    <input type="text" id="dropdownSearch2" class="form-control mb-2" placeholder="Search language..." >
     <select id="languageSelect2" class="form-select">
       <!--options-->
     </select>
@@ -56,64 +56,9 @@ Home
   </div>
 </div>
 
-<script>
-
-  document.addEventListener("DOMContentLoaded",function(){
-    filterDropdown(1);
-    filterDropdown(2);
-    document.getElementById("translate").addEventListener('click', async function(){
-
-      const text = document.getElementById("text").value;
-      const inp_lang = document.getElementById("languageSelect1").value;
-      const out_lang = document.getElementById("languageSelect2").value;
-
-      const res = await fetch("/translate_text",{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body: JSON.stringify({
-          text:text,
-          inp_lang:inp_lang,
-          out_lang:out_lang
-
-        })
-      });
-
-      const data = await res.json();
-      if (data.translated){
-        document.getElementById("out").innerText = data.translated;
-      }
-      else{
-        document.getElementById("out").innerText = "Error, reload";
-      }
-    });
-  })
+<script type="module" src="/static/scripts/text.js">
 
 
-async function filterDropdown(num) {
-  const query = document.getElementById("dropdownSearch" + num).value;
-
-  const res = await fetch("/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ q: query }) 
-  });
-
-  const data = await res.json();
-
-  const select = document.getElementById("languageSelect" + num);
-  select.innerHTML = ""; 
-
-  data.forEach(lang => {
-    const option = document.createElement("option");
-    option.value = lang.code;  
-    option.textContent = lang.language;
-    select.appendChild(option);
-  });
-}
 
 
 </script>

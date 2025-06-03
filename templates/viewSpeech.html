@@ -6,46 +6,37 @@
 <div class="container mt-4 d-flex gap-2">
   <a href="/"><button type="button" >Text</button></a>
   <button type="button"  disabled style="background-color:grey">Speech</button>
-  <a href="/image"><button type="button">
-    Image
-  </button></a>
+  <button type="button">Image</button>
 </div>
 
 <div class="container mt-5">
   <div class="row g-4">
     <div class="col-md-6 d-flex flex-column align-items-center justify-content-top">
-      <h3 class="mb-3">Record Your Speech</h3>
-      <button id="record" class="mb-3">Start Recording</button>
+      <h3 class="mb-3">Play Your Speech</h3>
+      <audio controls src="{{ url_for('translation_audio', trans_id=recent.id) }}"></audio>
       <textarea 
-        class="form-control" 
+        class="form-control mt-4" 
         id="in" 
         placeholder="Speech will appear here..." 
         disabled 
         rows="13"
-      ></textarea>
+      >{{ recent.original_text }}</textarea>
     </div>
 
     <div class="col-md-6">
       <div class="mb-3">
-        <input 
-          type="text" 
-          id="dropdownSearch2" 
-          class="form-control mb-2" 
-          placeholder="Search language..." 
-          onkeyup="filterDropdown(2)" 
-          autocomplete="off"
-        >
-        <select id="languageSelect2" class="form-select">
-          <!-- options -->
+        
+        <select id="languageSelect2" class="form-select mt-5" disabled >
+          <option selected>{{recent.output_language}}</option>
         </select>
       </div>
       <textarea 
-        class="form-control" 
+        class="form-control mt-4" 
         id="out" 
         placeholder="Output will appear here..." 
         disabled 
         rows="13"
-      ></textarea>
+      >{{recent.translated_text}}</textarea>
     </div>
   </div>
 </div>
@@ -54,7 +45,7 @@
 
 
 
-<script src="static/scripts/speech.js" type="module"></script>
+<script src="/static/scripts/viewSpeech.js" type="module"></script>
 
 
 

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}Verify{% endblock title %}
+
+{% block main %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card shadow-lg p-4" style="width: 100%; max-width: 900px;">
+    <h2 class="card-title text-center mb-4">Verify code</h2>
+    <form method="POST" action="/auth" id="form">
+      
+      <div class="mb-3">
+        <label for="code" class="form-label"></label>
+        <input type="text" id="code" name="code" class="form-control" placeholder="" required>
+      </div>
+      <div class="d-grid">
+        <button type="submit" >Confirm</button>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+<script></script>
+{% endblock main %}

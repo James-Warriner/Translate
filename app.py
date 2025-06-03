@@ -1,21 +1,26 @@
 
-import os
-from flask import Flask, flash, redirect, render_template, request, session
+
+from flask import Flask
 from flask_session import Session
-from werkzeug.security import check_password_hash, generate_password_hash
-from datetime import datetime
+
+from datetime import datetime, timedelta
 from flask import jsonify
 import sqlite3
 from routes import setup_routes
 
 
+
 app = Flask(__name__)
 
 
-app.config["Session_PERMANENT"] = False
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=7)
 app.config["SESSION_TYPE"] = "filesystem"
+
 Session(app)
+
+
 setup_routes(app)
+
 
 
 

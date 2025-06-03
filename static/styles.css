@@ -1,5 +1,5 @@
 :root {
-  --bs-primary: #002e697e; /* Change this to your desired color */
+  --bs-primary: #5100e77e; 
 }
 
 
@@ -7,23 +7,35 @@ body {
   overflow: hidden;
 }
 .sidebar {
-  height: 100vh;
-  overflow-y: auto;
-  background-color: var(--bs-primary);
-  border-right: 1px solid #dee2e6;
+  background-color: #f8f9fa;
 }
-.sidebar a {
+.sidebar .list-group-item {
+  border: none;
+  padding: 0.5rem 0;
+}
+.sidebar .list-group-item a {
   color: #333;
   text-decoration: none;
-  font-size: large;
-  padding: 10px 20px;
+}
+.sidebar .list-group-item a:hover {
+  text-decoration: underline;
+
+}
+.error-bar {
+  display: none;
+   background-color: #f8d7da;
+  color: #721c24;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+}
+.error-bar.visible {
   display: block;
 }
-    
-.sidebar a:hover {
-     
-  
-      background-color: #e9ecef;
+
+#recents {
+  max-height: 75vh;
+  overflow-y: auto;
 }
 .main-content {
   height: 100vh;
@@ -53,4 +65,40 @@ button:hover {
   background-color: var(--bs-primary-dark, #0056b3); /* fallback if custom variable not defined */
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.error-bar{
+  justify-content: center;
+  visibility: visible;
+  background-color: red;
+}
+
+.error-content{
+  text-align: center;
+  color: white;
+}
+
+.card-header {
+  /* flex container to push button to the far right */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bs-primary);
+}
+
+.imagebtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.imagebtn img {
+  /* make it big enough to see */
+  width: 24px;
+  height: auto;
+  display: block;
+}
+.imagebtn:hover{
+  background-color: red;
 }

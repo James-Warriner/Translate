@@ -5,21 +5,32 @@
 {% block main %}
 <div class="container mt-4 d-flex gap-2">
   <a href="/"><button type="button" >Text</button></a>
-  <button type="button"  disabled style="background-color:grey">Speech</button>
-  <a href="/image"><button type="button">
+  <button type="button"  >Speech</button>
+  <a href="/image"><button type="button" disabled style="background-color:grey">
     Image
   </button></a>
 </div>
 
-<div class="container mt-5">
+<div class="container mt-3">
   <div class="row g-4">
     <div class="col-md-6 d-flex flex-column align-items-center justify-content-top">
-      <h3 class="mb-3">Record Your Speech</h3>
-      <button id="record" class="mb-3">Start Recording</button>
+      <h3 class="mb-1">Upload image</h3>
+      <input class="mb-1" type="file" id="ImgInput" accept="image/*">
+      <input 
+          type="text" 
+          id="dropdownSearch1" 
+          class="form-control mb-2" 
+          placeholder="Search language..." 
+
+          autocomplete="off"
+        >
+        <select id="languageSelect1" class="form-select">
+          <!-- options -->
+        </select>
       <textarea 
         class="form-control" 
         id="in" 
-        placeholder="Speech will appear here..." 
+        placeholder="Detected text will appear here" 
         disabled 
         rows="13"
       ></textarea>
@@ -30,9 +41,9 @@
         <input 
           type="text" 
           id="dropdownSearch2" 
-          class="form-control mb-2" 
+          class="form-control mb-2 mt-5" 
           placeholder="Search language..." 
-          onkeyup="filterDropdown(2)" 
+
           autocomplete="off"
         >
         <select id="languageSelect2" class="form-select">
@@ -51,10 +62,21 @@
 </div>
 
 
+<div class="container mt-5">
+  <div class="row">
+    <div class="col text-center">
+      <button id="translateButton">
+        Translate
+      </button>
+    </div>
+  </div>
+</div>
 
 
 
-<script src="static/scripts/speech.js" type="module"></script>
+
+
+<script src="static/scripts/imageUpload.js" type="module"></script>
 
 
 

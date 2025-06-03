@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block main  %}
+
+<div class="container mt-4">
+  <button type="button" style="background-color:grey">
+    Text
+  </button>
+  <a href="/speech"><button type="button">
+    Speech
+  </button></a>
+  <a href="/image"><button type="button">
+    Image
+  </button></a>
+</div>
+  
+  
+  
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <div class="mb-3">
+    
+    <select id="languageSelect1" class="form-select" disabled>
+      <option selected>{{ recent.input_language }}</option>
+    </select>
+  </div>
+      <textarea id="text" class="form-control" placeholder="Input" rows="13" disabled >{{recent.original_text}}</textarea>
+    </div>
+    <div class="col">
+
+
+  <div class="mb-3">
+    
+    <select id="languageSelect2" class="form-select" disabled>
+      <option selected>{{ recent.output_language }}</option>
+    </select>
+  </div>
+      <textarea class="form-control" id="out" placeholder="Output" disabled rows="13">{{recent.translated_text}}</textarea>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="module" src="/static/scripts/text.js">
+
+
+
+
+</script>
+
+
+
+
+
+
+
+{% endblock  %}

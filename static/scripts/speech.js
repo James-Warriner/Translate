@@ -1,6 +1,10 @@
+import { recents } from "./fetchRecents.js";
+import { filterDropdown } from "./filter.js"
+
 document.addEventListener("DOMContentLoaded", function () {
   filterDropdown(1);
   filterDropdown(2);
+  recents();
 
   let mediaRecorder;
   let chunks = [];
@@ -45,31 +49,10 @@ document.addEventListener("DOMContentLoaded", function () {
       recordBtn.textContent = "Start Recording";
       isRecording = false;
     }
+
+    recents();
   });
 
 
 });
 
-async function filterDropdown(num) {
-  const query = document.getElementById("dropdownSearch" + num).value;
-
-  const res = await fetch("/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ q: query }),
-  });
-
-  const data = await res.json();
-
-  const select = document.getElementById("languageSelect" + num);
-  select.innerHTML = "";
-
-  data.forEach((lang) => {
-    const option = document.createElement("option");
-    option.value = lang.code;
-    option.textContent = lang.language;
-    select.appendChild(option);
-  });
-}

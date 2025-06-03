@@ -9,51 +9,70 @@
 
     <link href="/static/styles.css" rel="stylesheet">
     <title>{% block title %}Translate{% endblock %}</title>
+
+    <style>
+
+      
+    </style>
 </head>
 
 <body>
+  <div class="container-fluid">
 
+    <div class="error-bar" id="errorBar"></div>
 
-<div class="container-fluid">
     <div class="row">
-        <!-- Sidebar -->
-        <nav class="col-3 col-md-2 sidebar d-flex flex-column bg-light vh-100 p-3 border-end">
-            <h5>Menu</h5>
-            <a href="#">Home</a>
-            <a href="#">Translate</a>
+      <!-- Sidebar -->
+      <nav class="col-3 col-md-2 sidebar d-flex flex-column vh-100 p-3 border-end">
+
+
+        <h6 class="text-uppercase text-muted mb-2">Menu</h6>
+        <ul class="list-group mb-4">
+          <li class="list-group-item">
+            <a href="/">Home</a>
+          </li>
+          <li class="list-group-item">
             <a href="#">History</a>
+          </li>
+          <li class="list-group-item">
             <a href="#">Settings</a>
-            <h5 class="mt-4">Recent</h5>
-        </nav>
+          </li>
+          {% if isLoggedIn %}
+            <li class="list-group-item">
+              <a href="/logout">Logout</a>
+            </li>
+          {% endif %}
+        </ul>
 
+        <h6 class="text-uppercase text-muted mb-2">Recent</h6>
+        <div id="recents" class="list-group"></div>
+      </nav>
 
-        <div class="col-md-10 px-0">
-      <!-- Header -->
-      <header class="text-white p-3">
-        <h4 class="m-0">Welcome to Translate</h4>
-      </header>
+      <!-- Main content area -->
+      <div class="col-md-10 px-0">
 
-      <!-- Main content -->
-      <main class="p-4">
-        {% block main %}{% endblock %}
-      </main>
+        <header class="text-white py-3 px-4">
+          <h4 class="m-0">Welcome to Translate</h4>
+        </header>
+
+        <!-- Main content -->
+        <main class="p-4">
+          {% block main %}{% endblock %}
+        </main>
+      </div>
     </div>
-</div>
+  </div>
 
-
-
-
-<script>
+  <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const html = '<!DOCTYPE ' +
-            document.doctype.name +
-            (document.doctype.publicId ? ' PUBLIC "' + document.doctype.publicId + '"' : '') +
-            (!document.doctype.publicId && document.doctype.systemId ? ' SYSTEM' : '') +
-            (document.doctype.systemId ? ' "' + document.doctype.systemId + '"' : '') +
-            '>\n' + document.documentElement.outerHTML;
 
-        console.log("Full HTML:", html);
+      const html = '<!DOCTYPE ' +
+          document.doctype.name +
+          (document.doctype.publicId ? ' PUBLIC "' + document.doctype.publicId + '"' : '') +
+          (!document.doctype.publicId && document.doctype.systemId ? ' SYSTEM' : '') +
+          (document.doctype.systemId ? ' "' + document.doctype.systemId + '"' : '') +
+          '>\n' + document.documentElement.outerHTML;
     });
-</script>
+  </script>
 </body>
 </html>
